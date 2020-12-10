@@ -23,6 +23,7 @@ jobs:
         
     - name: Transition issue
       uses: atlassian/gajira-transition@master
+      id: steps.find.outputs.issue != null
       with:
         issue: ${{ steps.find.outputs.issue }}
         transition: "進行中"
