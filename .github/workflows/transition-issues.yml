@@ -23,7 +23,7 @@ jobs:
         
     - name: Transition issue
       uses: atlassian/gajira-transition@master
-      if: ${{ steps.find.outputs.issue }} != ""
+      if: ${{ steps.find.outputs.issue }}
       with:
         issue: ${{ steps.find.outputs.issue }}
         transition: "進行中"
