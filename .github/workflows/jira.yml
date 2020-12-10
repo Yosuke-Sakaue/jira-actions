@@ -1,6 +1,9 @@
-on: push
-
 name: Jira Example
+
+on:
+  issues:
+  push:
+    types: [opened]
 
 jobs:
   build:
@@ -14,11 +17,16 @@ jobs:
         JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
         JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
 
-    - name: Jira TODO
-      uses: atlassian/gajira-todo@master
+    - name: Jira Create issue
+   # You may pin to the exact commit or the version.
+   # uses: atlassian/gajira-create@c0a9c69ac9d6aa063fed57201e55336ada860183
+      uses: atlassian/gajira-create@v2.0.1
       with:
-        project: GA
+        # Key of the project
+        project: AC
+        # Type of the issue to be created. Example: 'Incident'
         issuetype: Task
-        description: Created automatically via GitHub Actions
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # Issue summary
+        summary: ${{ github.event.issue.title}}
+        # Issue description
+        description: ${{ github.event.issue.body}}
